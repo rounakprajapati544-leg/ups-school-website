@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Details</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <div class="logo">
+        <img src="images/UPS Logo.jpg" alt="UPS Logo">
+        <h2>UJJAVAL PUBLIC SCHOOL</h2>
+    </div>
+
+    <nav>
+
+        <ul>
+
+            <li><a href="index.html">Home</a></li>
+
+            <li><a href="about.html">About School</a></li>
+
+            <li><a href="contact.html">Contact Us</a></li>
+
+            <li><a href="fee-payment.html" class="active">Fee Payment</a></li>
+
+            <li><a href="brochure.html">School Brochure</a></li>
+
+            <li><a href="Online Admission.html">Online Admission</a></li>
+
+            <li><a href="notice.html">Notice</a></li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+<!-- ================= PAGE BANNER ================= -->
+
+<section class="page-banner">
+
+    <h1>Payment Details</h1>
+
+    <p>
+        Please verify the student information and complete the payment details.
+    </p>
+
+</section>
+
+<!-- ================= MAIN SECTION ================= -->
+
+<section class="payment-container">
+
+    <!-- Student Information -->
+
+    <div class="payment-card">
+
+        <h2>Student Information</h2>
+
+        <div class="student-photo">
+
+            <img src="images/default-student.png"
+                 id="studentPhoto"
+                 alt="Student Photo">
+
+        </div>
+
+        <div class="student-info">
+
+            <p>
+                <strong>Admission No :</strong>
+                <span id="admNo">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Student Name :</strong>
+                <span id="studentName">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Father Name :</strong>
+                <span id="fatherName">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Class :</strong>
+                <span id="studentClass">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Section :</strong>
+                <span id="studentSection">Loading...</span>
+            </p>
+
+            <p>
+                <strong>Status :</strong>
+
+                <span class="verified">
+
+                    ✔ Verified
+
+                </span>
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Payment Details -->
+
+    <div class="payment-card">
+
+        <h2>Fee Payment Details</h2>
+
+        <label>Fee Type</label>
+
+        <select id="feeType">
+
+            <option value="">Select Fee Type</option>
+
+            <option>Admission Fee</option>
+
+            <option>Tuition Fee</option>
+
+            <option>Transport Fee</option>
+
+            <option>Examination Fee</option>
+
+            <option>Library Fee</option>
+
+            <option>Computer Fee</option>
+
+        </select>
+
+        <label>Payment Month</label>
+
+        <select id="paymentMonth">
+
+            <option>Select Month</option>
+
+            <option>April</option>
+            <option>May</option>
+            <option>June</option>
+            <option>July</option>
+            <option>August</option>
+            <option>September</option>
+            <option>October</option>
+            <option>November</option>
+            <option>December</option>
+            <option>January</option>
+            <option>February</option>
+            <option>March</option>
+
+        </select>
+
+<!-- ================= PAYMENT DATE ================= -->
+
+<label for="paymentDate">Payment Date</label>
+
+<input
+    type="date"
+    id="paymentDate"
+    required>
+
+<!-- ================= FEE AMOUNT ================= -->
+
+<label for="amount">Fee Amount (₹)</label>
+
+<input
+    type="number"
+    id="amount"
+    placeholder="Enter Fee Amount"
+    min="1"
+    step="0.01"
+    required>
+
+<!-- ================= REMARKS ================= -->
+
+<label for="remarks">Remarks (Optional)</label>
+
+<textarea
+    id="remarks"
+    rows="4"
+    placeholder="Enter Remarks (if any)"></textarea>
+
+<!-- ================= BUTTONS ================= -->
+
+<div class="payment-buttons">
+
+    <button
+        type="button"
+        class="secondary-btn"
+        onclick="history.back()">
+
+        ← Back
+
+    </button>
+
+    <button
+        type="button"
+        class="primary-btn"
+        onclick="proceedPayment()">
+
+        Proceed to Payment →
+
+    </button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ================= SCRIPT ================= -->
+
+<script>
+
+function proceedPayment() {
+
+    const feeType = document.getElementById("feeType").value;
+    const paymentMonth = document.getElementById("paymentMonth").value;
+    const paymentDate = document.getElementById("paymentDate").value;
+    const amount = document.getElementById("amount").value;
+    const remarks = document.getElementById("remarks").value;
+
+    if (feeType === "") {
+
+        alert("Please select Fee Type.");
+
+        return;
+
+    }
+
+    if (paymentMonth === "" || paymentMonth === "Select Month") {
+
+        alert("Please select Payment Month.");
+
+        return;
+
+    }
+
+    if (paymentDate === "") {
+
+        alert("Please select Payment Date.");
+
+        return;
+
+    }
+
+    if (amount === "" || parseFloat(amount) <= 0) {
+
+        alert("Please enter a valid Fee Amount.");
+
+        return;
+
+    }
+
+    // Save payment details for next page
+
+    sessionStorage.setItem("feeType", feeType);
+
+    sessionStorage.setItem("paymentMonth", paymentMonth);
+
+    sessionStorage.setItem("paymentDate", paymentDate);
+
+    sessionStorage.setItem("amount", amount);
+
+    sessionStorage.setItem("remarks", remarks);
+
+    sessionStorage.setItem(
+    "studentName",
+    document.getElementById("studentName").innerText
+);
+
+sessionStorage.setItem(
+    "fatherName",
+    document.getElementById("fatherName").innerText
+);
+
+sessionStorage.setItem(
+    "className",
+    document.getElementById("studentClass").innerText
+);
+
+    // Redirect to Payment Method page
+
+    startRazorpayPayment();
+
+}
+
+function startRazorpayPayment(){
+
+
+    let amount = sessionStorage.getItem("amount");
+
+    let studentName = document.getElementById("studentName").innerText;
+
+    let studentClass = sessionStorage.getItem("className");
+
+
+
+    fetch("http://127.0.0.1:3000/create-order",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            amount: amount
+
+        })
+
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+
+        if(!data.success){
+
+            alert(data.message);
+            return;
+
+        }
+
+
+
+        let options = {
+
+
+            key:data.key,
+
+
+            amount:data.order.amount,
+
+
+            currency:"INR",
+
+
+            name:"UJJAVAL PUBLIC SCHOOL",
+
+
+            description:"School Fee Payment",
+
+
+            order_id:data.order.id,
+
+
+
+            handler:function(response){
+
+
+
+                console.log(response);
+
+
+
+                // SAVE PAYMENT AFTER SUCCESS
+
+
+                fetch("http://127.0.0.1:3000/save-online-payment",{
+
+
+                    method:"POST",
+
+
+                    headers:{
+
+
+                        "Content-Type":"application/json"
+
+
+                    },
+
+
+                    body: JSON.stringify({
+
+                        admissionNo: document.getElementById("admNo").innerText,
+
+                        studentName: studentName,
+
+                        fatherName: document.getElementById("fatherName").innerText,
+
+                        className: studentClass,
+
+                        feeType: document.getElementById("feeType").value,
+
+                        paymentMonth: document.getElementById("paymentMonth").value,
+
+                        amount: amount,
+
+                        paymentMode: "Online",
+
+                        razorpayOrderID: response.razorpay_order_id,
+
+                        razorpayPaymentID: response.razorpay_payment_id,
+
+                        status: "Success"
+
+                    })
+
+
+                })
+
+
+                .then(res=>res.json())
+
+
+                .then(result=>{
+
+
+                    if(result.success){
+
+// Save receipt information
+
+sessionStorage.setItem("receiptNo", result.receiptNo);
+
+sessionStorage.setItem("orderID", response.razorpay_order_id);
+
+sessionStorage.setItem("paymentID", response.razorpay_payment_id);
+
+
+// Save student details
+
+sessionStorage.setItem(
+    "AdmissionNo",
+    document.getElementById("admNo").innerText
+);
+
+sessionStorage.setItem(
+    "studentName",
+    document.getElementById("studentName").innerText
+);
+
+sessionStorage.setItem(
+    "fatherName",
+    document.getElementById("fatherName").innerText
+);
+
+sessionStorage.setItem(
+    "className",
+    document.getElementById("studentClass").innerText
+);
+
+
+// Save fee details
+
+sessionStorage.setItem(
+    "feeType",
+    document.getElementById("feeType").value
+);
+
+sessionStorage.setItem(
+    "paymentMonth",
+    document.getElementById("paymentMonth").value
+);
+
+sessionStorage.setItem(
+    "amount",
+    amount
+);
+
+sessionStorage.setItem(
+    "paymentDate",
+    document.getElementById("paymentDate").value
+);
+
+
+// Open receipt
+
+window.location.href =
+"receipt-format.html?receiptNo=" + result.receiptNo;
+
+
+}
+
+                    else{
+
+
+                        alert("Payment Successful but Saving Failed");
+
+
+                    }
+
+
+                });
+
+
+
+            },
+
+
+
+            prefill:{
+
+
+                name:studentName
+
+
+            },
+
+
+
+            theme:{
+
+
+                color:"#2563eb"
+
+
+            }
+
+
+
+        };
+
+
+
+        let razorpay = new Razorpay(options);
+
+
+
+        razorpay.open();
+
+
+
+    })
+
+
+
+    .catch(err=>{
+
+
+        console.log(err);
+
+
+        alert("Payment Gateway Connection Failed");
+
+
+    });
+
+
+
+}
+
+window.onload = function () {
+
+    document.getElementById("paymentDate").value =
+        new Date().toISOString().split("T")[0];
+
+};
+
+window.onload = function(){
+
+    let admissionNo = sessionStorage.getItem("AdmissionNo");
+
+
+    if(!admissionNo){
+
+        alert("Student Details Not Found");
+        return;
+
+    }
+
+
+    fetch("http://127.0.0.1:3000/check_fee",{
+
+        method:"POST",
+
+        headers:{
+            "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify({
+
+            admission_no: admissionNo
+
+        })
+
+    })
+
+    .then(res=>res.json())
+
+    .then(data=>{
+
+
+        if(data.error){
+
+            alert(data.error);
+            return;
+
+        }
+
+
+        let student = data.student;
+
+
+
+document.getElementById("admNo").innerHTML =
+student.AdmissionNo;
+
+
+document.getElementById("studentName").innerHTML =
+student.StudentName;
+
+
+document.getElementById("fatherName").innerHTML =
+student.FatherName;
+
+
+document.getElementById("studentClass").innerHTML =
+student.Class;
+
+
+document.getElementById("studentSection").innerHTML =
+student.Section;
+
+    })
+
+    .catch(err=>{
+
+        console.log(err);
+        alert("Backend Connection Failed");
+
+    });
+
+
+};
+
+</script>
+
+</body>
+
+</html>

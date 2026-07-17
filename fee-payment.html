@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fee Payment</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+
+<!-- ================= HEADER (same as your site) ================= -->
+<header>
+
+    <div class="logo">
+    <img src="images/UPS Logo.jpg" alt="Ujjaval Public School Logo">
+    <h2>UJJAVAL PUBLIC SCHOOL</h2>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About School</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+            <li><a href="fee-payment.html">Fee Payment</a></li>
+            <li><a href="brochure.html">School Brochure</a></li>
+            <li><a href="Online Admission.html">Online Admission</a></li>
+            <li><a href="notice.html">Notice</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<!-- ================= PAGE TITLE ================= -->
+<section class="page-banner">
+    <h1>Fee Payment Portal</h1>
+</section>
+
+<!-- ================= STEP 1: CHECK FEE ================= -->
+<section class="fee-container" id="checkSection">
+
+    <div class="fee-box">
+
+        <h2>Verify Student</h2>
+
+        <input type="text" id="adm" placeholder="Enter Admission Number">
+
+        <button onclick="checkFee()">Next</button>
+
+    </div>
+
+</section>
+
+<!-- ================= STEP 2: RESULT ================= -->
+<section class="fee-container" id="resultSection" style="display:none;">
+
+    <div class="fee-box" id="feeBox"></div>
+
+</section>
+
+
+<!-- ================= SCRIPT ================= -->
+<script>
+
+/* STEP 1: CHECK FEE */
+function checkFee() {
+
+    let adm = document.getElementById("adm").value;
+
+    if (!adm) {
+        alert("Please enter Admission Number");
+        return;
+    }
+
+    fetch("http://127.0.0.1:3000/check_fee", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            admission_no: adm
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        window.feeData = data;
+
+        renderFee();
+
+        document.getElementById("checkSection").style.display = "none";
+        document.getElementById("resultSection").style.display = "flex";
+
+    })
+    .catch((error) => {
+        console.log("Fetch Error:", error);
+        alert(error);
+});
+}
+
+/* STEP 2: RENDER FEE DETAILS */
+function renderFee() {
+
+    let d = window.feeData;
+
+    document.getElementById("feeBox").innerHTML = `
+
+        <h2>Student Verification</h2>
+
+        <p><b>Admission No:</b> ${d.student.AdmissionNo}</p>
+
+        <p><b>Student Name:</b> ${d.student.StudentName}</p>
+
+        <p><b>Father Name:</b> ${d.student.FatherName}</p>
+
+        <p><b>Class:</b> ${d.student.Class}</p>
+
+        <p><b>Section:</b> ${d.student.Section}</p>
+
+        <p><b>Status:</b>
+            <span class="badge paid">Verified</span>
+        </p>
+
+        <button onclick="continuePayment()">
+
+            Confirm & Continue →
+
+        </button>
+
+    `;
+
+}
+
+/* STEP 3: PAYMENT PAGE */
+function continuePayment() {
+
+    sessionStorage.setItem(
+        "AdmissionNo",
+        window.feeData.student.AdmissionNo
+    );
+
+    window.location.href = "payment-details.html";
+
+}
+
+</script>
+
+</body>
+</html>

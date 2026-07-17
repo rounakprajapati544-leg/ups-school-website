@@ -21,6 +21,11 @@
 </div>
 
     <nav>
+
+        <div class="menu-toggle">
+            ☰
+        </div>
+
         <ul>
 
             <li><a href="index.html">Home</a></li>
@@ -63,6 +68,46 @@
     </div>
 
 </section>
+
+<div class="mobile-nav">
+
+    <a href="index.html">Home</a>
+    <a href="about.html">About School</a>
+    <a href="contact.html">Contact Us</a>
+    <a href="fee-payment.html">Fee Payment</a>
+    <a href="brochure.html">School Brochure</a>
+    <a href="Online Admission.html">Online Admission</a>
+    <a href="notice.html">Notice</a>
+
+</div>
+
+<div class="overlay"></div>
+
+
+<script>
+
+const menuToggle = document.querySelector(".menu-toggle");
+const mobileNav = document.querySelector(".mobile-nav");
+const overlay = document.querySelector(".overlay");
+
+
+menuToggle.onclick = () => {
+
+    mobileNav.classList.add("active");
+    overlay.classList.add("active");
+
+};
+
+
+overlay.onclick = () => {
+
+    mobileNav.classList.remove("active");
+    overlay.classList.remove("active");
+
+};
+
+</script>
+
 
 </body>
 </html>

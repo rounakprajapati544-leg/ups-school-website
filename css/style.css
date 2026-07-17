@@ -1,793 +1,1324 @@
-/* ==========================
+/* =====================================================
    RESET
-========================== */
+===================================================== */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    padding-top: 140px; /* header + announcement fix */
-    background: #f5f5f5;
+body{
+    font-family:'Poppins',sans-serif;
+    background:#f5f5f5;
+    padding-top:140px;
+    overflow-x:hidden;
 }
 
-/* ==========================
+
+/* =====================================================
    HEADER
-========================== */
+===================================================== */
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
+header{
 
-    width: 100%;
-    height: 90px;
+    position:fixed;
+    top:0;
+    left:0;
 
-    background: #003366;
-    color: white;
+    width:100%;
+    height:90px;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background:#003366;
+    color:#fff;
 
-    padding: 0 40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-    z-index: 1000;
+    padding:0 40px;
+
+    z-index:1000;
 }
 
-/* ==========================
+
+/* =====================================================
    LOGO
-========================== */
+===================================================== */
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.logo{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
 }
 
-.logo img {
-    width: 55px;
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
+
+.logo img{
+
+    width:60px;
+    height:60px;
+
+    object-fit:cover;
+    border-radius:50%;
+
 }
 
-.logo h2 {
-    font-size: 20px;
-    white-space: nowrap;
+
+.logo h2{
+
+    font-size:28px;
+    color:#fff;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
 }
 
-/* ==========================
+
+
+/* =====================================================
    NAVIGATION
-========================== */
+===================================================== */
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 25px;
+nav{
+
+    display:flex;
+    align-items:center;
+
 }
 
-nav ul li a {
-    text-decoration: none;
-    color: white;
-    font-size: 15px;
-    font-weight: 500;
-    position: relative;
-    transition: 0.3s;
+
+nav ul{
+
+    display:flex;
+    align-items:center;
+
+    gap:25px;
+
+    list-style:none;
+
 }
 
-nav ul li a:hover {
-    color: #FFD700;
+
+nav ul li{
+
+    list-style:none;
+
 }
 
-nav ul li a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0%;
-    height: 2px;
-    background: #FFD700;
-    transition: 0.3s;
+
+nav ul li a{
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-size:15px;
+    font-weight:500;
+
+    position:relative;
+
+    transition:.3s;
+
 }
 
-nav ul li a:hover::after {
-    width: 100%;
+
+nav ul li a:hover{
+
+    color:#FFD700;
+
 }
 
-/* ==========================
+
+nav ul li a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-6px;
+
+    width:0;
+    height:2px;
+
+    background:#FFD700;
+
+    transition:.3s;
+
+}
+
+
+nav ul li a:hover::after{
+
+    width:100%;
+
+}
+
+
+
+/* =====================================================
+   MOBILE MENU BUTTON
+===================================================== */
+
+.menu-toggle{
+
+    display:none;
+
+    font-size:26px;
+
+    color:#fff;
+
+    cursor:pointer;
+
+}
+
+
+
+/* =====================================================
+   MOBILE SIDEBAR
+===================================================== */
+
+.mobile-nav{
+
+    position:fixed;
+
+    top:0;
+    left:-280px;
+
+    width:280px;
+    height:100vh;
+
+    background:#003366;
+
+    z-index:2000;
+
+    transition:.35s;
+
+    padding-top:90px;
+
+}
+
+
+.mobile-nav.active{
+
+    left:0;
+
+}
+
+
+.mobile-nav a{
+
+    display:block;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    padding:18px 30px;
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+
+    transition:.3s;
+
+}
+
+
+.mobile-nav a:hover{
+
+    background:#00509E;
+
+}
+
+
+
+/* =====================================================
+   OVERLAY
+===================================================== */
+
+.overlay{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:.3s;
+
+    z-index:1500;
+
+}
+
+
+.overlay.active{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+
+/* =====================================================
    ANNOUNCEMENT BAR
-========================== */
+===================================================== */
 
-.announcement {
-    width: 100%;
-    height: 50px;
-    background: #FFD700;
-    color: #000;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
+.announcement{
 
-.ticker {
-    white-space: nowrap;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 600;
-    animation: moveText 18s linear infinite;
-}
-
-@keyframes moveText {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
-}
-
-/* ==========================
-   HERO SECTION
-========================== */
-
-.hero {
-    height: calc(100vh - 140px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    background:
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-    url('https://images.unsplash.com/photo-1509062522246-3755977927d7');
-
-    background-size: cover;
-    background-position: center;
-}
-
-.hero-content {
-    color: white;
-}
-
-.hero h1 {
-    font-size: 50px;
-    margin-bottom: 15px;
-}
-
-.hero p {
-    font-size: 20px;
-    margin-bottom: 30px;
-}
-
-/* ==========================
-   BUTTON
-========================== */
-
-.btn {
-    background: #FFD700;
-    color: black;
-    padding: 12px 35px;
-    border-radius: 30px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: 0.3s;
-}
-
-.btn:hover {
-    background: white;
-    transform: scale(1.05);
-}
-
-/* ==========================
-   PAGE BANNER
-========================== */
-
-.page-banner {
-    background: linear-gradient(135deg, #003366, #0059b3);
-    color: white;
-    text-align: center;
-    padding: 55px 20px;
-}
-
-.page-banner h1 {
-    font-size: 34px;
-    margin: 0;
-}
-
-/* ==========================
-   ABOUT SECTION
-========================== */
-
-.about-section {
-    width: 90%;
-    max-width: 1200px;
-    margin: 40px auto;
-    display: flex;
-    gap: 35px;
-}
-
-.about-image {
-    flex: 1;
-    display: grid;
-    gap: 12px;
-}
-
-.about-image img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    border-radius: 12px;
-}
-
-.about-content {
-    flex: 2;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-}
-
-.about-content h2 {
-    color: #003366;
-    font-size: 28px;
-}
-
-.about-content h3 {
-    color: #0056b3;
-    margin-top: 18px;
-    border-left: 4px solid #0056b3;
-    padding-left: 10px;
-}
-
-.about-content p {
-    color: #444;
-    line-height: 1.7;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo img{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 50%;   /* Remove this line if you don't want a circular logo */
-}
-
-.logo h2{
-    margin: 0;
-    font-size: 28px;
-    color: #fff;          /* Change if your header background is light */
-    font-weight: 700;
-}
-
-/* ==========================
-   CORE VALUES
-========================== */
-
-.values-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    list-style: none;
-}
-
-.values-list li {
-    background: #f1f6ff;
-    padding: 10px 12px;
-    border-left: 4px solid #003366;
-    border-radius: 6px;
-}
-
-/* ==========================
-   CONTACT
-========================== */
-
-.contact-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.contact-info,
-.contact-form {
-    flex: 1;
-    min-width: 300px;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.contact-info h2,
-.contact-form h2 {
-    color: #003366;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.contact-form button {
-    width: 100%;
-    padding: 12px;
-    background: #003366;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.contact-form button:hover {
-    background: #00509E;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo img{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-    border-radius: 50%;   /* Remove this line if you don't want a circular logo */
-}
-
-.logo h2{
-    margin: 0;
-    font-size: 28px;
-    color: #fff;          /* Change if your header background is light */
-    font-weight: 700;
-}
-
-/* ==========================
-   FEE SECTION
-========================== */
-
-.fee-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 50px auto;
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.fee-box {
-    flex: 1;
-    min-width: 320px;
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.fee-box h2 {
-    color: #003366;
-}
-
-.fee-box input,
-.fee-box select {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0 15px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.fee-box button {
-    width: 100%;
-    padding: 12px;
-    background: #003366;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.fee-box button:hover {
-    background: #00509E;
-}
-
-.fee-box table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.fee-box th,
-.fee-box td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
-}
-
-.fee-box th {
-    background: #003366;
-    color: white;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo img{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-.logo h2{
-    margin: 0;
-    color: white;
-}
-
-/* ==========================
-   BADGES
-========================== */
-
-.badge {
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 12px;
-    color: white;
-}
-
-.paid {
-    background: #16a34a;
-}
-
-.pending {
-    background: #dc2626;
-}
-
-/* ==========================
-   BROCHURE
-========================== */
-
-.brochure-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin: 50px 0;
-}
-
-.brochure-box {
-    width: 450px;
-    background: white;
-    padding: 30px;
-    text-align: center;
-    border-radius: 12px;
-}
-
-.download-btn {
-    display: inline-block;
-    padding: 15px 30px;
-    background: #003366;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: 0.3s;
-}
-
-.download-btn:hover {
-    background: #00509E;
-}
-
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.logo img{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-.logo h2{
-    margin: 0;
-    color: white;
-}
-
-.contact-form select{
     width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    margin-bottom:15px;
-    font-size:15px;
-    font-family:'Poppins',sans-serif;
+
+    height:50px;
+
+    background:#FFD700;
+
+    color:#000;
+
+    display:flex;
+
+    align-items:center;
+
+    overflow:hidden;
+
 }
 
-.contact-form input,
-.contact-form textarea,
-.contact-form select{
-    width:100%;
-    padding:14px;
-    border:1px solid #ddd;
-    border-radius:8px;
-    margin-bottom:15px;
-    font-size:15px;
-    font-family:'Poppins',sans-serif;
-}
 
-.contact-form button{
-    width:100%;
-}
+.ticker{
 
-/* ==========================
-   ADMISSION STATUS
-========================== */
+    white-space:nowrap;
 
-.status-box{
-    margin-top:20px;
-    padding:15px;
-    border-radius:10px;
-    background:#f8f9fa;
-    border:1px solid #ddd;
-}
+    font-size:16px;
 
-.status-text{
-    display:inline-block;
-    padding:8px 18px;
-    border-radius:25px;
     font-weight:600;
-    font-size:15px;
+
+    animation:moveText 18s linear infinite;
+
 }
 
-.status-text.pending{
-    background:#fff3cd;
-    color:#856404;
-    border:1px solid #ffe69c;
-}
 
-.status-text.approved{
-    background:#d1e7dd;
-    color:#0f5132;
-    border:1px solid #badbcc;
-}
+@keyframes moveText{
 
-.status-text.rejected{
-    background:#f8d7da;
-    color:#842029;
-    border:1px solid #f5c2c7;
-}
+    from{
 
-.logo{
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
+        transform:translateX(100%);
 
-.logo img{
-    width: 60px;
-    height: 60px;
-    object-fit: contain;
-}
-
-.logo h2{
-    margin: 0;
-    color: white;
-}
-
-/* ==========================
-   RESPONSIVE DESIGN
-========================== */
-
-@media screen and (max-width: 768px){
-
-    body{
-        padding-top:120px;
-        overflow-x:hidden;
     }
 
+    to{
 
-    /* HEADER */
+        transform:translateX(-100%);
+
+    }
+
+}
+
+
+
+/* =====================================================
+   HERO SECTION
+===================================================== */
+
+.hero{
+
+    min-height:calc(100vh - 140px);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    padding:40px 20px;
+
+    background:
+    linear-gradient(rgba(0,0,0,.55),rgba(0,0,0,.55)),
+    url("https://images.unsplash.com/photo-1509062522246-3755977927d7");
+
+    background-size:cover;
+
+    background-position:center;
+
+}
+
+
+
+.hero-content{
+
+    max-width:900px;
+
+    color:#fff;
+
+}
+
+
+.hero h1{
+
+    font-size:50px;
+
+    margin-bottom:15px;
+
+    font-weight:700;
+
+}
+
+
+.hero p{
+
+    font-size:20px;
+
+    margin-bottom:30px;
+
+    line-height:1.7;
+
+}
+
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.btn{
+
+    display:inline-block;
+
+    padding:12px 35px;
+
+    background:#FFD700;
+
+    color:#000;
+
+    text-decoration:none;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+}
+
+
+.btn:hover{
+
+    background:#fff;
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* =====================================================
+   HEADER RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
 
     header{
-        height:auto;
-        min-height:80px;
-        padding:15px 20px;
-        flex-direction:column;
-        gap:15px;
+
+        padding:0 20px;
+
     }
 
 
     .logo h2{
-        font-size:16px;
+
+        font-size:22px;
+
+    }
+
+
+    nav ul{
+
+        gap:16px;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    body{
+
+        padding-top:130px;
+
+    }
+
+
+    header{
+
+        height:80px;
+
+        padding:0 15px;
+
     }
 
 
     .logo img{
-        width:45px;
-        height:45px;
-    }
 
+        width:50px;
+        height:50px;
 
-    /* NAVIGATION */
-
-    nav ul{
-        flex-direction:column;
-        gap:12px;
-        text-align:center;
-    }
-
-
-    nav ul li a{
-        font-size:14px;
-    }
-
-
-    /* ANNOUNCEMENT */
-
-    .announcement{
-        height:40px;
-    }
-
-    .ticker{
-        font-size:13px;
-    }
-
-
-    /* HERO */
-
-    .hero{
-        height:calc(100vh - 120px);
-        padding:20px;
-    }
-
-
-    .hero h1{
-        font-size:32px;
-    }
-
-
-    .hero p{
-        font-size:16px;
-    }
-
-
-    .btn{
-        padding:10px 25px;
-    }
-
-
-    /* PAGE BANNER */
-
-    .page-banner h1{
-        font-size:26px;
-    }
-
-
-    /* ABOUT */
-
-    .about-section{
-        flex-direction:column;
-        width:90%;
-    }
-
-
-    .about-content h2{
-        font-size:24px;
-    }
-
-
-    /* VALUES */
-
-    .values-list{
-        grid-template-columns:1fr;
-    }
-
-
-    /* CONTACT */
-
-    .contact-container{
-        flex-direction:column;
-        width:90%;
-    }
-
-
-    .contact-info,
-    .contact-form{
-        min-width:100%;
-        padding:20px;
-    }
-
-
-    /* FEES */
-
-    .fee-container{
-        flex-direction:column;
-        width:90%;
-    }
-
-
-    .fee-box{
-        min-width:100%;
-    }
-
-
-    /* TABLE RESPONSIVE */
-
-    .fee-box table{
-        display:block;
-        overflow-x:auto;
-        white-space:nowrap;
-    }
-
-
-    /* BROCHURE */
-
-    .brochure-box{
-        width:90%;
-        padding:20px;
-    }
-
-}
-
-
-/* SMALL MOBILE DEVICES */
-
-@media screen and (max-width:480px){
-
-    .hero h1{
-        font-size:26px;
-    }
-
-
-    .hero p{
-        font-size:14px;
     }
 
 
     .logo h2{
-        font-size:14px;
+
+        font-size:18px;
+
     }
 
 
-    .page-banner{
-        padding:40px 15px;
+    nav{
+
+        display:none;
+
+    }
+
+
+    .menu-toggle{
+
+        display:block;
+
+    }
+
+
+    .announcement{
+
+        height:45px;
+
+    }
+
+
+    .ticker{
+
+        font-size:14px;
+
+    }
+
+
+    .hero{
+
+        min-height:70vh;
+
+    }
+
+
+    .hero h1{
+
+        font-size:34px;
+
+    }
+
+
+    .hero p{
+
+        font-size:16px;
+
     }
 
 }
 
-/* ================= PAYMENT PAGE ================= */
+
+
+@media(max-width:480px){
+
+    .logo img{
+
+        width:42px;
+        height:42px;
+
+    }
+
+
+    .logo h2{
+
+        font-size:15px;
+
+    }
+
+
+    .ticker{
+
+        font-size:13px;
+
+    }
+
+
+    .hero h1{
+
+        font-size:28px;
+
+    }
+
+
+    .hero p{
+
+        font-size:15px;
+
+    }
+
+}
+
+/* =====================================================
+   PAGE BANNER
+===================================================== */
+
+.page-banner{
+
+    background:linear-gradient(135deg,#003366,#0059b3);
+
+    color:#fff;
+
+    text-align:center;
+
+    padding:55px 20px;
+
+}
+
+
+.page-banner h1{
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+
+
+/* =====================================================
+   ABOUT SECTION
+===================================================== */
+
+.about-section{
+
+    width:min(1200px,92%);
+
+    margin:45px auto;
+
+    display:flex;
+
+    gap:35px;
+
+    align-items:flex-start;
+
+}
+
+
+.about-image{
+
+    flex:1;
+
+    display:grid;
+
+    gap:15px;
+
+}
+
+
+.about-image img{
+
+    width:100%;
+
+    height:220px;
+
+    object-fit:cover;
+
+    border-radius:12px;
+
+}
+
+
+.about-content{
+
+    flex:2;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:30px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.06);
+
+}
+
+
+.about-content h2{
+
+    color:#003366;
+
+    margin-bottom:15px;
+
+    font-size:30px;
+
+}
+
+
+.about-content h3{
+
+    margin-top:22px;
+
+    margin-bottom:10px;
+
+    color:#0056b3;
+
+    border-left:4px solid #0056b3;
+
+    padding-left:10px;
+
+}
+
+
+.about-content p{
+
+    line-height:1.8;
+
+    color:#444;
+
+}
+
+
+
+/* =====================================================
+   CORE VALUES
+===================================================== */
+
+.values-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:12px;
+
+    list-style:none;
+
+    margin-top:18px;
+
+}
+
+
+.values-list li{
+
+    background:#f3f7ff;
+
+    padding:12px;
+
+    border-left:4px solid #003366;
+
+    border-radius:8px;
+
+}
+
+
+
+/* =====================================================
+   CONTACT SECTION
+===================================================== */
+
+.contact-container{
+
+    width:min(1200px,92%);
+
+    margin:50px auto;
+
+    display:flex;
+
+    gap:30px;
+
+    align-items:flex-start;
+
+}
+
+
+.contact-info,
+.contact-form{
+
+    flex:1;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+
+.contact-info h2,
+.contact-form h2{
+
+    color:#003366;
+
+    margin-bottom:20px;
+
+}
+
+
+.contact-info p{
+
+    margin-bottom:15px;
+
+    line-height:1.8;
+
+    color:#444;
+
+}
+
+
+
+/* =====================================================
+   FORM CONTROLS
+===================================================== */
+
+.contact-form input,
+.contact-form textarea,
+.contact-form select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    border:1px solid #d6d6d6;
+
+    border-radius:8px;
+
+    font-size:15px;
+
+    font-family:'Poppins',sans-serif;
+
+    outline:none;
+
+    transition:.3s;
+
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus,
+.contact-form select:focus{
+
+    border-color:#0059b3;
+
+    box-shadow:0 0 6px rgba(0,89,179,.25);
+
+}
+
+
+.contact-form textarea{
+
+    min-height:130px;
+
+    resize:vertical;
+
+}
+
+
+.contact-form button{
+
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#003366;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.contact-form button:hover{
+
+    background:#00509E;
+
+}
+
+
+
+/* =====================================================
+   FEE PAGE
+===================================================== */
+
+.fee-container{
+
+    width:min(1200px,92%);
+
+    margin:50px auto;
+
+    display:flex;
+
+    gap:30px;
+
+}
+
+
+.fee-box{
+
+    flex:1;
+
+    background:#fff;
+
+    padding:28px;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+
+.fee-box h2{
+
+    color:#003366;
+
+    margin-bottom:20px;
+
+}
+
+
+.fee-box input,
+.fee-box select{
+
+    width:100%;
+
+    padding:13px;
+
+    margin-bottom:18px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    font-family:'Poppins',sans-serif;
+
+}
+
+
+.fee-box button{
+
+    width:100%;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#003366;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+
+.fee-box button:hover{
+
+    background:#00509E;
+
+}
+
+
+.fee-box table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    margin-top:20px;
+
+}
+
+
+.fee-box th{
+
+    background:#003366;
+
+    color:#fff;
+
+}
+
+
+.fee-box th,
+.fee-box td{
+
+    border:1px solid #ddd;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+
+
+/* =====================================================
+   BADGES
+===================================================== */
+
+.badge{
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    color:#fff;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+.paid{
+
+    background:#16a34a;
+
+}
+
+
+.pending{
+
+    background:#dc2626;
+
+}
+
+
+
+/* =====================================================
+   BROCHURE
+===================================================== */
+
+.brochure-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    margin:60px 0;
+
+}
+
+
+.brochure-box{
+
+    width:450px;
+
+    max-width:92%;
+
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    text-align:center;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
+
+}
+
+
+.download-btn{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:15px 35px;
+
+    background:#003366;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:8px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+
+.download-btn:hover{
+
+    background:#00509E;
+
+}
+
+
+
+/* =====================================================
+   ADMISSION STATUS
+===================================================== */
+
+.status-box{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    background:#f8f9fa;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+}
+
+
+.status-text{
+
+    display:inline-block;
+
+    padding:8px 18px;
+
+    border-radius:25px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+
+.status-text.pending{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+}
+
+
+.status-text.approved{
+
+    background:#d1e7dd;
+
+    color:#0f5132;
+
+}
+
+
+.status-text.rejected{
+
+    background:#f8d7da;
+
+    color:#842029;
+
+}
+
+
+
+/* =====================================================
+   PART 2 RESPONSIVE
+===================================================== */
+
+@media(max-width:992px){
+
+    .about-section{
+
+        flex-direction:column;
+
+    }
+
+
+    .about-image{
+
+        width:100%;
+
+    }
+
+
+    .contact-container,
+    .fee-container{
+
+        flex-direction:column;
+
+    }
+
+
+    .hero h1{
+
+        font-size:42px;
+
+    }
+
+
+    .hero p{
+
+        font-size:18px;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .page-banner{
+
+        padding:45px 15px;
+
+    }
+
+
+    .page-banner h1{
+
+        font-size:28px;
+
+    }
+
+
+    .about-content,
+    .contact-info,
+    .contact-form,
+    .fee-box{
+
+        padding:22px;
+
+    }
+
+
+    .about-content h2{
+
+        font-size:24px;
+
+    }
+
+
+    .values-list{
+
+        grid-template-columns:1fr;
+
+    }
+
+
+    .fee-box table{
+
+        display:block;
+
+        overflow-x:auto;
+
+        white-space:nowrap;
+
+    }
+
+
+    .brochure-box{
+
+        padding:25px;
+
+    }
+
+}
+
+
+
+@media(max-width:480px){
+
+    .page-banner h1{
+
+        font-size:24px;
+
+    }
+
+
+    .about-image img{
+
+        height:180px;
+
+    }
+
+
+    .contact-info h2,
+    .contact-form h2,
+    .fee-box h2{
+
+        font-size:22px;
+
+    }
+
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select,
+    .fee-box input,
+    .fee-box select{
+
+        font-size:14px;
+
+    }
+
+}
+
+/* =====================================================
+   PAYMENT DETAILS PAGE
+===================================================== */
 
 .payment-container{
 
-    max-width:1200px;
+    width:min(1200px,92%);
 
     margin:50px auto;
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
 
     gap:30px;
 
-    padding:0 20px;
-
 }
+
+
 
 .payment-card{
 
@@ -801,13 +1332,17 @@ nav ul li a:hover::after {
 
 }
 
-.payment-card h2{
 
-    margin-bottom:25px;
+
+.payment-card h2{
 
     color:#003366;
 
+    margin-bottom:25px;
+
 }
+
+
 
 .student-photo{
 
@@ -816,6 +1351,8 @@ nav ul li a:hover::after {
     margin-bottom:25px;
 
 }
+
+
 
 .student-photo img{
 
@@ -827,17 +1364,21 @@ nav ul li a:hover::after {
 
     object-fit:cover;
 
-    border:4px solid #f4b400;
+    border:4px solid #FFD700;
 
 }
+
+
 
 .student-info p{
 
     margin:12px 0;
 
-    font-size:16px;
+    line-height:1.8;
 
 }
+
+
 
 .payment-card label{
 
@@ -851,20 +1392,37 @@ nav ul li a:hover::after {
 
 }
 
+
+
 .payment-card input,
-.payment-card select{
+.payment-card select,
+.payment-card textarea{
 
     width:100%;
 
-    padding:12px;
+    padding:13px;
 
     border:1px solid #ccc;
 
     border-radius:8px;
 
+    font-family:'Poppins',sans-serif;
+
     font-size:15px;
 
 }
+
+
+
+.payment-card textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+
+}
+
+
 
 .verified{
 
@@ -874,57 +1432,17 @@ nav ul li a:hover::after {
 
 }
 
-/* =====================================
-   PAYMENT PAGE - TEXTAREA
-===================================== */
-
-.payment-card textarea{
-
-    width:100%;
-    min-height:120px;
-
-    padding:12px 15px;
-
-    border:1px solid #dcdcdc;
-
-    border-radius:8px;
-
-    font-size:15px;
-
-    font-family:'Poppins',sans-serif;
-
-    outline:none;
-
-    resize:vertical;
-
-    transition:.3s;
-
-    box-sizing:border-box;
-
-    background:#fff;
-
-}
-
-.payment-card textarea:focus{
-
-    border-color:#0d6efd;
-
-    box-shadow:0 0 6px rgba(13,110,253,.25);
-
-}
 
 
-/* =====================================
-   PAYMENT BUTTON SECTION
-===================================== */
+/* =====================================================
+   PAYMENT BUTTONS
+===================================================== */
 
 .payment-buttons{
 
     display:flex;
 
     justify-content:space-between;
-
-    align-items:center;
 
     gap:20px;
 
@@ -933,46 +1451,29 @@ nav ul li a:hover::after {
 }
 
 
-/* =====================================
-   BACK BUTTON
-===================================== */
 
+.primary-btn,
 .secondary-btn{
 
-    background:#6c757d;
+    flex:1;
 
-    color:#fff;
+    padding:14px;
 
     border:none;
 
-    padding:14px 35px;
-
     border-radius:8px;
+
+    cursor:pointer;
 
     font-size:15px;
 
     font-weight:600;
 
-    font-family:'Poppins',sans-serif;
-
-    cursor:pointer;
-
     transition:.3s;
 
 }
 
-.secondary-btn:hover{
 
-    background:#5a6268;
-
-    transform:translateY(-2px);
-
-}
-
-
-/* =====================================
-   PROCEED BUTTON
-===================================== */
 
 .primary-btn{
 
@@ -980,121 +1481,284 @@ nav ul li a:hover::after {
 
     color:#fff;
 
-    border:none;
-
-    padding:14px 40px;
-
-    border-radius:8px;
-
-    font-size:15px;
-
-    font-weight:600;
-
-    font-family:'Poppins',sans-serif;
-
-    cursor:pointer;
-
-    transition:.3s;
-
 }
+
+
 
 .primary-btn:hover{
 
     background:#0b5ed7;
 
-    transform:translateY(-2px);
-
 }
 
 
-/* =====================================
-   RESPONSIVE
-===================================== */
 
-@media(max-width:768px){
-
-.payment-buttons{
-
-    flex-direction:column;
-
-}
-
-.primary-btn,
 .secondary-btn{
 
-    width:100%;
+    background:#6c757d;
+
+    color:#fff;
 
 }
 
-}
 
-@media(max-width:900px){
 
-.payment-container{
+.secondary-btn:hover{
 
-grid-template-columns:1fr;
+    background:#5a6268;
 
 }
 
-}
+
+
+/* =====================================================
+   NOTICE PAGE
+===================================================== */
 
 .notice-area{
 
-width:90%;
-margin:50px auto;
+    width:min(1100px,92%);
+
+    margin:50px auto;
 
 }
+
 
 
 .notice-content{
 
-background:white;
-padding:40px;
-border-radius:10px;
+    background:#fff;
+
+    padding:35px;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 18px rgba(0,0,0,.08);
 
 }
+
 
 
 .notice-content h2{
 
-text-align:center;
-color:#003366;
-margin-bottom:30px;
+    text-align:center;
+
+    color:#003366;
+
+    margin-bottom:30px;
 
 }
+
 
 
 .notice-card{
 
-padding:20px;
-margin:20px 0;
-background:#f5f7fb;
-border-left:5px solid #003366;
-border-radius:8px;
+    padding:22px;
+
+    margin-bottom:20px;
+
+    background:#f6f8fc;
+
+    border-left:5px solid #003366;
+
+    border-radius:8px;
 
 }
+
 
 
 .notice-card h3{
 
-color:#003366;
+    color:#003366;
+
+    margin-bottom:10px;
 
 }
+
 
 
 .notice-card p{
 
-margin-top:10px;
-line-height:1.7;
+    line-height:1.8;
+
+    color:#444;
 
 }
 
 
+
 .notice-card span{
 
-display:block;
-margin-top:10px;
-color:#ff9800;
-font-weight:600;
+    display:block;
+
+    margin-top:12px;
+
+    color:#ff9800;
+
+    font-weight:600;
+
+}
+
+
+
+/* =====================================================
+   RECEIPT PAGE
+===================================================== */
+
+.receipt-container{
+
+    width:min(900px,95%);
+
+    margin:40px auto;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:12px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+
+
+.receipt-container table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+.receipt-container td{
+
+    padding:12px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+
+
+/* =====================================================
+   FINAL RESPONSIVE CLEANUP
+===================================================== */
+
+@media(max-width:992px){
+
+    .payment-container{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+
+
+@media(max-width:768px){
+
+    .payment-container{
+
+        width:92%;
+
+    }
+
+
+    .payment-card{
+
+        padding:22px;
+
+    }
+
+
+    .payment-buttons{
+
+        flex-direction:column;
+
+    }
+
+
+    .primary-btn,
+    .secondary-btn{
+
+        width:100%;
+
+    }
+
+
+    .notice-content{
+
+        padding:25px;
+
+    }
+
+
+    .notice-card{
+
+        padding:18px;
+
+    }
+
+
+    .receipt-container{
+
+        padding:20px;
+
+        overflow-x:auto;
+
+    }
+
+
+    .receipt-container table{
+
+        min-width:600px;
+
+    }
+
+}
+
+
+
+@media(max-width:480px){
+
+    .student-photo img{
+
+        width:110px;
+
+        height:110px;
+
+    }
+
+
+    .payment-card h2{
+
+        font-size:22px;
+
+    }
+
+
+    .notice-content h2{
+
+        font-size:22px;
+
+    }
+
+
+    .notice-card h3{
+
+        font-size:18px;
+
+    }
+
+
+    .notice-card p{
+
+        font-size:14px;
+
+    }
 
 }

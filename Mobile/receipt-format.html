@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Online Fee Payment Receipt</title>
+
+
+<style>
+
+
+body{
+
+    margin:0;
+
+    background:#f1f5f9;
+
+    font-family:"Times New Roman", serif;
+
+}
+
+
+
+
+.receipt{
+
+    width:850px;
+
+    margin:40px auto;
+
+    background:#ffffff;
+
+    padding:50px;
+
+    border:1px solid #cbd5e1;
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.12);
+
+}
+
+
+
+
+
+/* UNIVERSITY HEADER */
+
+
+.header{
+
+    text-align:center;
+
+    border-bottom:4px double #1e3a8a;
+
+    padding-bottom:25px;
+
+}
+
+
+
+.header img{
+
+    width:100px;
+
+    height:100px;
+
+    object-fit:contain;
+
+}
+
+
+
+.header h1{
+
+    margin:12px 0 5px;
+
+    font-size:34px;
+
+    letter-spacing:1px;
+
+    color:#1e3a8a;
+
+}
+
+
+
+.header h2{
+
+    margin:5px;
+
+    font-size:18px;
+
+    font-weight:normal;
+
+}
+
+
+
+.header p{
+
+    margin:8px;
+
+    font-size:14px;
+
+    color:#475569;
+
+}
+
+
+
+
+
+/* RECEIPT TITLE */
+
+
+.receipt-heading{
+
+    margin:35px 0;
+
+    text-align:center;
+
+}
+
+
+
+.receipt-heading h2{
+
+    display:inline-block;
+
+    border:2px solid #1e3a8a;
+
+    padding:12px 50px;
+
+    color:#1e3a8a;
+
+    letter-spacing:2px;
+
+}
+
+
+
+
+
+/* RECEIPT META */
+
+
+.meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:30px;
+
+}
+
+
+
+.meta-box{
+
+    width:45%;
+
+    padding:15px;
+
+    border:1px solid #cbd5e1;
+
+}
+
+
+
+.meta-box span{
+
+    font-weight:bold;
+
+    color:#1e3a8a;
+
+}
+
+
+
+
+
+/* SECTION */
+
+
+.section-title{
+
+    background:#1e3a8a;
+
+    color:white;
+
+    padding:10px 15px;
+
+    font-size:17px;
+
+    margin-top:25px;
+
+}
+
+
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+
+td,th{
+
+    border:1px solid #cbd5e1;
+
+    padding:13px;
+
+}
+
+
+
+th{
+
+    background:#f8fafc;
+
+    text-align:left;
+
+}
+
+
+
+
+
+/* AMOUNT */
+
+
+.amount-area{
+
+    margin-top:30px;
+
+    border:2px solid #1e3a8a;
+
+    padding:25px;
+
+    text-align:right;
+
+}
+
+
+
+.amount-area h1{
+
+    color:#1e3a8a;
+
+    margin:0;
+
+}
+
+
+
+
+
+.status{
+
+    color:#15803d;
+
+    font-weight:bold;
+
+}
+
+
+
+
+
+/* FOOTER */
+
+
+.footer{
+
+    margin-top:70px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+}
+
+
+
+.sign{
+
+    text-align:center;
+
+}
+
+
+
+
+
+.footer-note{
+
+    margin-top:40px;
+
+    text-align:center;
+
+    font-size:13px;
+
+    color:#64748b;
+
+}
+
+
+
+
+
+.print-btn{
+
+    text-align:center;
+
+    margin-top:30px;
+
+}
+
+
+
+button{
+
+    padding:12px 35px;
+
+    background:#1e3a8a;
+
+    color:white;
+
+    border:none;
+
+    cursor:pointer;
+
+}
+
+
+
+@media print{
+
+
+button{
+
+display:none;
+
+}
+
+
+body{
+
+background:white;
+
+}
+
+
+.receipt{
+
+box-shadow:none;
+
+}
+
+
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="receipt">
+
+
+
+
+
+<!-- UNIVERSITY HEADER -->
+
+
+<div class="header">
+
+
+<img src="images/UPS Logo.jpg">
+
+
+<h1>
+UJJAVAL PUBLIC SCHOOL
+</h1>
+
+
+<h2>
+योगः कर्मसु कौशलम्
+</h2>
+
+
+<p>
+CGBSE Affiliated Senior Secondary School
+</p>
+
+
+<p>
+School Registration No: 23075 | Fee Management Department
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="receipt-heading">
+
+
+<h2>
+OFFICIAL FEE RECEIPT
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="meta">
+
+
+<div class="meta-box">
+
+
+Receipt Number:
+
+<br>
+
+<span id="receiptNo">
+Loading...
+</span>
+
+
+<br><br>
+
+
+Payment Date:
+
+<br>
+
+<span id="paymentDate">
+Loading...
+</span>
+
+
+
+</div>
+
+
+
+
+
+<div class="meta-box">
+
+
+Payment Status:
+
+<br>
+
+
+<span class="status">
+
+✔ SUCCESSFUL
+
+</span>
+
+
+<br><br>
+
+
+Payment Mode:
+
+<br>
+
+
+<span>
+Online
+</span>
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="section-title">
+
+STUDENT PARTICULARS
+
+</div>
+
+
+
+
+<table>
+
+
+<tr>
+
+<th>
+Admission Number
+</th>
+
+
+<td id="admissionNo">
+Loading...
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Student Name
+</th>
+
+
+<td id="studentName">
+Loading...
+</td>
+
+
+</tr>
+
+
+
+
+<tr>
+
+<th>
+Father Name
+</th>
+
+
+<td id="fatherName">
+Loading...
+</td>
+
+
+</tr>
+
+
+
+
+<tr>
+
+<th>
+Academic Class
+</th>
+
+
+<td id="className">
+Loading...
+</td>
+
+</tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+
+<div class="section-title">
+
+FEE TRANSACTION DETAILS
+
+</div>
+
+
+
+<table>
+
+
+<tr>
+
+
+<th>
+Fee Particular
+</th>
+
+
+<th>
+Month
+</th>
+
+
+<th>
+Amount
+</th>
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td id="feeType">
+Loading...
+</td>
+
+
+<td id="paymentMonth">
+Loading...
+</td>
+
+
+<td id="amount">
+₹0
+</td>
+
+
+</tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<div class="section-title">
+
+DIGITAL PAYMENT INFORMATION
+
+</div>
+
+
+
+<table>
+
+
+<tr>
+
+<th>
+Razorpay Order ID
+</th>
+
+
+<td id="orderID">
+Loading...
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<th>
+Razorpay Payment ID
+</th>
+
+
+<td id="paymentID">
+Loading...
+</td>
+
+
+</tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<div class="amount-area">
+
+
+<p>
+TOTAL AMOUNT RECEIVED
+</p>
+
+
+<h1 id="totalAmount">
+₹0
+</h1>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="footer">
+
+
+<div class="sign">
+
+
+____________________
+
+
+<br>
+
+
+Accounts Department
+
+
+</div>
+
+
+
+
+
+<div class="sign">
+
+
+____________________
+
+
+<br>
+
+
+Principal / Authorized Signatory
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+<div class="footer-note">
+
+
+This receipt has been generated electronically through UJJAVAL PUBLIC SCHOOL Fee Management System.
+
+
+<br>
+
+
+This document is valid without physical signature.
+
+
+</div>
+
+
+
+
+
+
+
+<div class="print-btn">
+
+
+<button onclick="window.print()">
+
+Print / Save PDF
+
+</button>
+
+
+</div>
+
+
+
+
+
+
+</div>
+
+
+</body>
+
+
+
+<script>
+
+const receiptNo = new URLSearchParams(window.location.search).get("receiptNo");
+
+
+if(receiptNo){
+
+fetch("http://192.168.29.152:3000/receipt/" + receiptNo)
+
+.then(res=>res.json())
+
+.then(result=>{
+
+
+if(!result.success){
+
+alert("Receipt Not Found");
+
+return;
+
+}
+
+
+const p = result.data;
+
+
+// Payment details
+
+document.getElementById("receiptNo").innerText =
+p.ReceiptNo;
+
+
+document.getElementById("studentName").innerText =
+p.StudentName;
+
+
+document.getElementById("className").innerText =
+p.Class;
+
+
+document.getElementById("amount").innerText =
+"₹" + p.Amount;
+
+
+document.getElementById("totalAmount").innerText =
+"₹" + p.Amount;
+
+
+document.getElementById("orderID").innerText =
+p.RazorpayOrderID;
+
+
+document.getElementById("paymentID").innerText =
+p.RazorpayPaymentID;
+
+
+document.getElementById("paymentDate").innerText =
+new Date(p.PaymentDate).toLocaleDateString();
+
+
+
+// Extra fields currently unavailable
+
+document.getElementById("admissionNo").innerText =
+sessionStorage.getItem("AdmissionNo") || "N/A";
+
+
+document.getElementById("fatherName").innerText =
+sessionStorage.getItem("fatherName") || "N/A";
+
+
+document.getElementById("feeType").innerText =
+sessionStorage.getItem("feeType") || "N/A";
+
+
+document.getElementById("paymentMonth").innerText =
+sessionStorage.getItem("paymentMonth") || "N/A";
+
+
+});
+
+
+}
+
+</script>
+
+</html>

@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Online Admission</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+</head>
+
+
+<body>
+
+
+<div class="overlay" id="overlay"></div>
+
+
+<!-- SIDEBAR -->
+
+<div class="sidebar" id="sidebar">
+
+
+<div class="sidebar-header">
+
+<img src="images/UPS Logo.jpg">
+
+<h2>Ujjaval Public School</h2>
+
+<p>
+Education • Discipline • Excellence
+</p>
+
+</div>
+
+
+
+<div class="menu">
+
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+
+<a href="about.html">
+<i class="fa-solid fa-school"></i>
+About School
+</a>
+
+
+<a href="online-admission.html">
+<i class="fa-solid fa-user-plus"></i>
+Online Admission
+</a>
+
+
+<a href="fee-payment.html">
+<i class="fa-solid fa-money-check-dollar"></i>
+Fee Payment
+</a>
+
+
+<a href="notice.html">
+<i class="fa-solid fa-bell"></i>
+Notices
+</a>
+
+
+<a href="brochure.html">
+<i class="fa-solid fa-book-open"></i>
+Brochure
+</a>
+
+
+<a href="contact.html">
+<i class="fa-solid fa-phone"></i>
+Contact
+</a>
+
+
+</div>
+
+</div>
+
+
+
+
+<!-- HEADER -->
+
+<header>
+
+
+<button id="menuBtn">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+<div class="logo">
+
+<img src="images/UPS Logo.jpg">
+
+<h2>
+Ujjaval Public School
+</h2>
+
+</div>
+
+
+</header>
+
+
+
+
+
+<!-- PAGE BANNER -->
+
+
+<section class="page-banner">
+
+<h1>
+Online Admission
+</h1>
+
+</section>
+
+
+
+
+
+<!-- MAIN CONTENT -->
+
+
+<section class="admission-container">
+
+
+
+<div class="admission-card">
+
+
+<h2>
+Admission Information
+</h2>
+
+
+
+<p>
+<strong>📚 Classes Available:</strong><br>
+Nursery to Class XII
+</p>
+
+
+
+<p>
+<strong>📄 Required Documents:</strong><br>
+
+• Birth Certificate<br>
+• Aadhaar Card<br>
+• Passport Size Photograph<br>
+• Previous School Report Card
+
+</p>
+
+
+
+<p>
+<strong>🕒 Office Hours:</strong><br>
+
+Monday – Saturday<br>
+8:00 AM – 4:00 PM
+
+</p>
+
+
+
+<p>
+<strong>📞 Admission Helpline:</strong><br>
+
++91 7000376167
+
+</p>
+
+
+
+<p>
+<strong>📧 Email:</strong><br>
+
+ujjavalpublic@gmail.com
+
+</p>
+
+
+</div>
+
+<!-- ADMISSION FORM -->
+
+<div class="admission-card">
+
+
+<h2>
+Admission Form
+</h2>
+
+
+
+<form onsubmit="sendAdmission(event)">
+
+
+
+<input 
+type="text" 
+id="student" 
+placeholder="Student Name" 
+required>
+
+
+
+<input 
+type="text" 
+id="father" 
+placeholder="Father's Name" 
+required>
+
+
+
+<input 
+type="text" 
+id="mother" 
+placeholder="Mother's Name" 
+required>
+
+
+
+<input 
+type="date" 
+id="dob" 
+required>
+
+
+
+
+<select id="class" required>
+
+
+<option value="">
+Select Class
+</option>
+
+
+<option>Nursery</option>
+<option>LKG</option>
+<option>UKG</option>
+<option>Class 1</option>
+<option>Class 2</option>
+<option>Class 3</option>
+<option>Class 4</option>
+<option>Class 5</option>
+<option>Class 6</option>
+<option>Class 7</option>
+<option>Class 8</option>
+<option>Class 9</option>
+<option>Class 10</option>
+<option>Class 11</option>
+<option>Class 12</option>
+
+
+</select>
+
+
+
+
+<input 
+type="tel" 
+id="mobile"
+placeholder="Parent Mobile Number"
+required>
+
+
+
+
+<label>
+Aadhaar Number
+</label>
+
+
+<input
+type="text"
+id="aadhaar"
+maxlength="20"
+placeholder="Enter Aadhaar Number">
+
+
+
+
+<input
+type="email"
+id="email"
+placeholder="Email Address">
+
+
+
+
+<textarea
+id="address"
+rows="5"
+placeholder="Address"></textarea>
+
+
+
+
+
+<button type="submit">
+
+Apply for Admission
+
+</button>
+
+
+
+</form>
+
+
+</div>
+
+
+
+
+
+
+<!-- TRACK STATUS -->
+
+
+<div class="admission-card">
+
+
+<h2>
+Track Admission Status
+</h2>
+
+
+
+<input
+type="text"
+id="applicationID"
+placeholder="Application ID (Example: UPS202600001)">
+
+
+
+<input
+type="tel"
+id="statusMobile"
+maxlength="11"
+placeholder="Registered Mobile Number">
+
+
+
+<button 
+type="button"
+onclick="checkAdmissionStatus()">
+
+Check Admission Status
+
+</button>
+
+
+
+<div id="statusMessage"></div>
+
+
+
+</div>
+
+
+
+</section>
+
+
+
+
+
+
+
+<script src="js/script.js"></script>
+
+
+
+
+
+
+<script>
+
+
+function sendAdmission(event){
+
+
+event.preventDefault();
+
+
+
+fetch("http://192.168.29.152:3000/admission",{
+
+
+method:"POST",
+
+
+headers:{
+
+
+"Content-Type":"application/json"
+
+
+},
+
+
+
+body:JSON.stringify({
+
+
+student:
+document.getElementById("student").value,
+
+
+father:
+document.getElementById("father").value,
+
+
+mother:
+document.getElementById("mother").value,
+
+
+dob:
+document.getElementById("dob").value,
+
+
+class:
+document.getElementById("class").value,
+
+
+mobile:
+document.getElementById("mobile").value,
+
+
+aadhaar:
+document.getElementById("aadhaar").value,
+
+
+email:
+document.getElementById("email").value,
+
+
+address:
+document.getElementById("address").value
+
+
+})
+
+
+})
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+if(data.success){
+
+
+alert(
+
+"Admission Request Submitted Successfully.\n\n"+
+"Application ID : "+
+data.applicationID+
+"\n\nPlease save this Application ID."
+
+);
+
+
+
+document.querySelector("form").reset();
+
+
+
+}
+
+
+else{
+
+
+alert("Admission Request Failed");
+
+
+console.log(data);
+
+
+}
+
+
+
+})
+
+
+.catch(error=>{
+
+
+console.log(error);
+
+
+alert("Backend Server Not Connected");
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+function checkAdmissionStatus(){
+
+
+
+const applicationID =
+document.getElementById("applicationID").value.trim();
+
+
+
+const mobile =
+document.getElementById("statusMobile").value.trim();
+
+
+
+
+if(applicationID==="" || mobile===""){
+
+
+alert(
+"Please enter Application ID and Mobile Number."
+);
+
+
+return;
+
+
+}
+
+
+
+
+fetch(
+"http://192.168.29.152:3000/check-admission-status?applicationID="
++
+encodeURIComponent(applicationID)
++
+"&mobile="
++
+encodeURIComponent(mobile)
+
+)
+
+
+
+.then(response=>response.json())
+
+
+
+.then(data=>{
+
+
+const statusBox =
+document.getElementById("statusMessage");
+
+
+
+if(data.success){
+
+
+statusBox.innerHTML=`
+
+
+<div class="status-box">
+
+
+<h3>
+
+Admission Status
+
+</h3>
+
+
+
+<p>
+<strong>Application ID:</strong>
+${data.data.ApplicationID}
+</p>
+
+
+
+<p>
+<strong>Student Name:</strong>
+${data.data.StudentName}
+</p>
+
+
+
+<p>
+<strong>Applied Class:</strong>
+${data.data.ClassApplied}
+</p>
+
+
+
+
+<p>
+
+<strong>Status:</strong>
+
+
+<span class="status-text ${data.data.Status.toLowerCase()}">
+
+${data.data.Status}
+
+</span>
+
+
+</p>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+else{
+
+
+statusBox.innerHTML=`
+
+<div style="color:red;font-weight:bold;">
+
+Invalid Application ID or Mobile Number.
+
+</div>
+
+`;
+
+
+
+}
+
+
+})
+
+
+
+.catch(error=>{
+
+
+console.log(error);
+
+
+alert("Unable to connect to server.");
+
+
+});
+
+
+
+}
+
+
+
+</script>
+
+
+
+
+</body>
+
+</html>

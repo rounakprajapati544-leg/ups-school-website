@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fee Payment</title>
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+<style>
+
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+
+body{
+
+background:#f5f7fb;
+
+}
+
+
+/* HEADER */
+
+
+header{
+
+height:70px;
+
+background:#003366;
+
+display:flex;
+
+align-items:center;
+
+padding:0 15px;
+
+color:white;
+
+}
+
+
+#menuBtn{
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:25px;
+
+margin-right:15px;
+
+}
+
+
+.logo{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+}
+
+
+.logo img{
+
+height:45px;
+
+width:45px;
+
+border-radius:50%;
+
+}
+
+
+.logo h2{
+
+font-size:18px;
+
+color:white;
+
+}
+
+
+
+
+/* SIDEBAR */
+
+
+.sidebar{
+
+position:fixed;
+
+top:0;
+
+left:-280px;
+
+height:100%;
+
+width:270px;
+
+background:white;
+
+z-index:1000;
+
+transition:.3s;
+
+box-shadow:0 0 20px rgba(0,0,0,.2);
+
+}
+
+
+
+.sidebar.active{
+
+left:0;
+
+}
+
+
+
+.sidebar-header{
+
+background:#003366;
+
+color:white;
+
+text-align:center;
+
+padding:25px 10px;
+
+}
+
+
+.sidebar-header img{
+
+width:80px;
+
+height:80px;
+
+border-radius:50%;
+
+}
+
+
+
+.sidebar-header h2{
+
+font-size:20px;
+
+}
+
+
+
+.sidebar-header p{
+
+font-size:13px;
+
+}
+
+
+
+
+.menu a{
+
+display:block;
+
+padding:15px 20px;
+
+text-decoration:none;
+
+color:#333;
+
+font-size:16px;
+
+border-bottom:1px solid #eee;
+
+}
+
+
+
+.menu a i{
+
+width:25px;
+
+color:#003366;
+
+}
+
+
+
+
+.overlay{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+height:100%;
+
+width:100%;
+
+background:rgba(0,0,0,.5);
+
+z-index:900;
+
+}
+
+
+
+.overlay.active{
+
+display:block;
+
+}
+
+
+
+
+
+/* PAGE BANNER */
+
+
+.page-banner{
+
+height:180px;
+
+background:#003366;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+color:white;
+
+}
+
+
+.page-banner h1{
+
+font-size:28px;
+
+color:white;
+
+}
+
+
+
+.page-banner h1{
+
+font-size:28px;
+
+}
+
+
+
+
+
+/* FEE CARD */
+
+
+.fee-container{
+
+padding:20px;
+
+}
+
+
+
+.fee-card{
+
+background:white;
+
+padding:25px;
+
+border-radius:15px;
+
+box-shadow:0 5px 20px rgba(0,0,0,.15);
+
+}
+
+
+
+.fee-card h2{
+
+text-align:center;
+
+color:#003366;
+
+margin-bottom:20px;
+
+}
+
+
+
+.fee-card p{
+
+text-align:center;
+
+font-size:15px;
+
+margin-bottom:20px;
+
+}
+
+
+
+.fee-card input{
+
+width:100%;
+
+padding:14px;
+
+border:1px solid #ccc;
+
+border-radius:8px;
+
+font-size:15px;
+
+margin-bottom:15px;
+
+}
+
+
+
+.fee-card button{
+
+width:100%;
+
+padding:14px;
+
+border:none;
+
+background:#003366;
+
+color:white;
+
+border-radius:8px;
+
+font-size:16px;
+
+font-weight:600;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div class="overlay" id="overlay"></div>
+
+<div class="sidebar" id="sidebar">
+
+<div class="sidebar-header">
+
+<img src="images/UPS Logo.jpg">
+
+<h2>UJJAVAL PUBLIC SCHOOL</h2>
+
+<p>
+Education • Discipline • Excellence
+</p>
+
+</div>
+
+
+<div class="menu">
+
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Home
+</a>
+
+
+<a href="about.html">
+<i class="fa-solid fa-school"></i>
+About School
+</a>
+
+
+<a href="online-admission.html">
+<i class="fa-solid fa-user-plus"></i>
+Online Admission
+</a>
+
+
+<a href="fee-payment.html">
+<i class="fa-solid fa-money-check-dollar"></i>
+Fee Payment
+</a>
+
+
+<a href="notice.html">
+<i class="fa-solid fa-bell"></i>
+Notices
+</a>
+
+
+<a href="brochure.html">
+<i class="fa-solid fa-book-open"></i>
+Brochure
+</a>
+
+
+<a href="contact.html">
+<i class="fa-solid fa-phone"></i>
+Contact
+</a>
+
+
+</div>
+
+</div>
+
+<header>
+
+
+<button id="menuBtn">
+
+<i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+<div class="logo">
+
+<img src="images/UPS Logo.jpg">
+
+<h2>
+Ujjaval Public School
+</h2>
+
+</div>
+
+
+</header>
+
+
+
+
+
+
+<section class="page-banner">
+
+<h1>
+Fee Payment Portal
+</h1>
+
+</section>
+
+
+
+
+
+
+
+<section class="fee-container">
+
+
+<div class="fee-card">
+
+
+<h2>
+Verify Student
+</h2>
+
+
+<p>
+Enter your Admission Number to continue fee payment.
+</p>
+
+
+
+<input 
+type="text"
+id="admissionNo"
+placeholder="Enter Admission Number">
+
+
+
+<button onclick="checkFee()">
+
+Next
+
+</button>
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+<script>
+
+
+const menuBtn=document.getElementById("menuBtn");
+
+const sidebar=document.getElementById("sidebar");
+
+const overlay=document.getElementById("overlay");
+
+
+
+menuBtn.onclick=function(){
+
+sidebar.classList.toggle("active");
+
+overlay.classList.toggle("active");
+
+}
+
+
+
+overlay.onclick=function(){
+
+sidebar.classList.remove("active");
+
+overlay.classList.remove("active");
+
+}
+
+
+</script>
+
+<script>
+
+function checkFee(){
+
+let admissionNo =
+document.getElementById("admissionNo").value;
+
+
+if(admissionNo===""){
+
+alert("Please enter Admission Number");
+return;
+
+}
+
+
+console.log("Sending Admission:", admissionNo);
+fetch("http://192.168.29.152:3000/check_fee",{
+
+method:"POST",
+
+headers:{
+
+"Content-Type":"application/json"
+
+},
+
+
+body:JSON.stringify({
+
+admission_no:admissionNo
+
+})
+
+
+})
+
+
+.then(res=>res.json())
+
+
+.then(data=>{
+
+
+console.log(data);
+
+
+if(data.error){
+
+alert(data.error);
+
+return;
+
+}
+
+
+// save student details
+
+sessionStorage.setItem(
+"AdmissionNo",
+data.student.AdmissionNo
+);
+
+
+sessionStorage.setItem(
+"studentData",
+JSON.stringify(data.student)
+);
+
+
+// next page
+
+window.location.href="payment-details.html";
+
+
+})
+
+
+.catch(error=>{
+
+
+console.log(error);
+
+alert("Backend Server Not Connected");
+
+
+});
+
+
+}
+
+</script>
+
+
+
+</body>
+
+</html>
